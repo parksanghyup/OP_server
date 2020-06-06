@@ -1,0 +1,22 @@
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="./spin.js"></script>
+<script>
+    var spinner;
+    jQuery(function () {
+        spinner = new Spinner().spin().el;
+        jQuery(document.body).append(spinner);
+        jQuery(spinner).css('display', 'none');
+    });
+
+    window.onbeforeunload = function (e) {
+        if (e != null && e != undefined) {
+            jQuery(spinner).css('display', '');
+        }
+    };
+</script>
+
+<form method='post' action='' enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="image" id="">
+    <input type="submit">
+</form>
