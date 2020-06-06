@@ -4,7 +4,7 @@ import cv2
 import os
 import matplotlib.pyplot as plt
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'pregnant.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opnsource.settings')
 import django
 django.setup()
 
