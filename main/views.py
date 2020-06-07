@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.conf import settings
 from main.models import Post
 import analysis
 
@@ -22,12 +23,16 @@ def test(request):
         post.image = request.FILES["image"]
         post.save()
         
-        analysis.draw_line(post.pk)
+        
+
+
+        object = analysis.draw_line(post.pk)
 
         data = {
             "message" : "message",
-            "image" : post.image.url 
+            "image" : post.image.url,
+            "result" : object.result.url
         }
-        return JsonResponse(data)
+        return render(request, "test.html", data)
     else:
         return render(request, "test.html")

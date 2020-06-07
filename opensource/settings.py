@@ -123,3 +123,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+RESULT_URL = '/result/'
+RESULT_ROOT = os.path.join(BASE_DIR, 'result')

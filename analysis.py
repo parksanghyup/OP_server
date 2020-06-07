@@ -9,6 +9,7 @@ import django
 django.setup()
 
 from main.models import Post
+from django.conf import settings
 
 def draw_line(pk):
 
@@ -33,11 +34,13 @@ def draw_line(pk):
     # 위의 path에 있는 network 불러오기
     net = cv2.dnn.readNetFromCaffe(protoFile, weightsFile)
 
-    path = Post.objects.get(pk=pk).image.path
+    object = Post.objects.get(pk=pk)
+    path = object.image.path
+    filename = object.name
     path = path.replace("\\","/")
     image = plt.imread(path)
     # image = cv2.imread(path)
-    print(image, path)
+    print(filename)
 
     # bgr -> rgb
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -97,6 +100,8 @@ def draw_line(pk):
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-    cv2.imwrite("target.jpg", imageCopy)
+    cv2.imwrite("./media/"+filename+"_result.PNG", imageCopy)
+    object.result = filename+"_result.PNG"
+    object.save()
 
-    return imageCopy
+    return object
