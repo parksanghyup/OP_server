@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io
 
 myenv/
+media/
 
 ### OSX ###
 .DS_Store

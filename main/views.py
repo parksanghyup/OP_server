@@ -6,15 +6,6 @@ import analysis
 
 def analysis_view(request):
 
-    data = {
-        "message" : "message",
-        "image" : ""
-    }
-    # json_dumps_params = {"ensure_ascii":True} //문자 아스키코드로 바꿔서 전달할때 추가하기
-    return JsonResponse(data)
-
-
-def test(request):
 
     if request.method == "POST":
         
@@ -30,6 +21,31 @@ def test(request):
 
         data = {
             "message" : "message",
+            "image" : post.image.url,
+            "result" : object.result.url
+        }
+        return JsonResponse(data)
+    else:
+        return HttpResponse("worng request")
+
+
+
+def test(request):
+
+    if request.method == "POST":
+        
+        post = Post()
+        post.name = request.FILES["image"].name 
+        post.image = request.FILES["image"]
+        post.save()
+        
+        
+
+
+        object, result_data = analysis.draw_line(post.pk)
+
+        data = {
+            "message" : result_data,
             "image" : post.image.url,
             "result" : object.result.url
         }
