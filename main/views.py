@@ -3,6 +3,13 @@ from django.http import HttpResponse, JsonResponse
 from django.conf import settings
 from main.models import Post
 import analysis
+from rest_framework import viewsets
+from main.serializers import PostSerializer
+
+class PostViewSet(viewsets.ModelViewSet):
+    queryset = Post.objects.all().order_by('-pk')
+    serializer_class = PostSerializer
+
 
 def analysis_view(request):
 

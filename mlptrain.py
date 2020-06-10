@@ -72,32 +72,32 @@ def get_result_data(rows):
 
 
 
-    pipe_lr = make_pipeline(StandardScaler(),  ## 순서대로 진행
-                        MLPClassifier(hidden_layer_sizes=(100),solver='lbfgs', random_state=3, max_iter=2000))
+    # pipe_lr = make_pipeline(StandardScaler(),  ## 순서대로 진행
+    #                     MLPClassifier(hidden_layer_sizes=(100),solver='lbfgs', random_state=3, max_iter=2000))
 
-    pipe_lr.fit(X_train, y_train.ravel())
-    # values :  will give the values in an array. (shape: (n,1)
-    # ravel() : will convert that array shape to (n, )
-    pipe_lr.score(X_test,y_test)
+    # pipe_lr.fit(X_train, y_train.ravel())
+    # # values :  will give the values in an array. (shape: (n,1)
+    # # ravel() : will convert that array shape to (n, )
+    # pipe_lr.score(X_test,y_test)
 
-    kfold = StratifiedKFold(n_splits=10,
-                       random_state=1).split(X_train,y_train)
+    # kfold = StratifiedKFold(n_splits=10,
+    #                    random_state=1).split(X_train,y_train)
 
-    scores = []
+    # scores = []
     # for k, (train, test) in enumerate(kfold):
     #     pipe_lr.fit(X_train[train], y_train[train])
     #     score = pipe_lr.score(X_train[test], y_train[test])
     #     scores.append(score)
     #     print('폴드: %2d ,정확도 : %.3f' % (k+1, score))
 
-    print('lnCV 정확도: %.3f +/- %.3f' %(np.mean(scores),np.std(scores)))
+    # print('lnCV 정확도: %.3f +/- %.3f' %(np.mean(scores),np.std(scores)))
 
-    print("훈련 정확도:",pipe_lr.score(X_train,y_train.ravel()))
-    print("테스트 정확도:",pipe_lr.score(X_test,y_test))
-    X_test_pred = pipe_lr.predict(X_test)
-    print(X_test_pred)
+    # print("훈련 정확도:",pipe_lr.score(X_train,y_train.ravel()))
+    # print("테스트 정확도:",pipe_lr.score(X_test,y_test))
+    # X_test_pred = pipe_lr.predict(X_test)
+    # print(X_test_pred)
 
-    print(pipe_lr.predict(A))
+    # print(pipe_lr.predict(A))
 
 
     cnt_T =0
