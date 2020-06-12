@@ -15,23 +15,23 @@ class PostViewSet(viewsets.ModelViewSet):
 @csrf_exempt
 def analysis_view(request):
 
-
     if request.method == "POST":
         
-        post = Post()
-        post.name = request.FILES["image"].name 
-        post.image = request.FILES["image"]
-        post.save()      
-        object = analysis.draw_line(post.pk)
+        # post = Post()
+        # post.name = request.FILES["image"].name 
+        # post.image = request.FILES["image"]
+        # post.save()      
+        # object = analysis.draw_line(post.pk)
 
         data = {
+            "POST" : request.POST,
             "message" : "message",
-            "image" : post.image.url,
-            "result" : object.result.url
+            # "image" : post.image.url,
+            # "result" : object.result.url
         }
-        return HttpResponse("HIHIHIHHI")
+        return JsonResponse(data)
     else:
-        return JsonResponse({"Worng":"WORNG"})
+        return HttpResponse("get is worng request")
 
 
 
