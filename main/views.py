@@ -19,11 +19,7 @@ def analysis_view(request):
         post = Post()
         post.name = request.FILES["image"].name 
         post.image = request.FILES["image"]
-        post.save()
-        
-        
-
-
+        post.save()      
         object = analysis.draw_line(post.pk)
 
         data = {
@@ -31,9 +27,9 @@ def analysis_view(request):
             "image" : post.image.url,
             "result" : object.result.url
         }
-        return JsonResponse(data)
+        return HttpResponse("HIHIHIHHI")
     else:
-        return HttpResponse("worng request")
+        return JsonResponse({"Worng":"WORNG"})
 
 
 
