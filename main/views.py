@@ -5,12 +5,14 @@ from main.models import Post
 import analysis
 from rest_framework import viewsets
 from main.serializers import PostSerializer
+from django.views.decorators.csrf import csrf_exempt
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all().order_by('-pk')
     serializer_class = PostSerializer
 
 
+@csrf_exempt
 def analysis_view(request):
 
 
