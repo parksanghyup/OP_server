@@ -23,6 +23,8 @@ def analysis_view(request):
         # post.save()      
         # object = analysis.draw_line(post.pk)
 
+        print(request.POST)
+
         data = {
             "POST" : request.POST,
             "message" : "message",
