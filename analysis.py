@@ -115,8 +115,8 @@ def draw_line(pk):
     object.result = filename+"_result.PNG"
     object.save()
 
-    result_data = get_result_data(rows)
+    total_percent, result_data = get_result_data(rows)
 
     print(result_data)
 
-    return object, result_data
+    return object, result_data, total_percent

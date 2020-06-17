@@ -100,18 +100,18 @@ def get_result_data(rows):
     # print(pipe_lr.predict(A))
 
 
-    cnt_T =0
-    cnt_F =0
+    # cnt_T =0
+    # cnt_F =0
 
-    for i in range(0,200):
-        if y_test.T[0][i] == 0:
-            if y_test.T[0][i] == X_test_pred[i]:
-                cnt_F +=1
-        if y_test.T[0][i] == 1:
-            if y_test.T[0][i] == X_test_pred[i]:
-                cnt_T +=1
+    # for i in range(0,200):
+    #     if y_test.T[0][i] == 0:
+    #         if y_test.T[0][i] == X_test_pred[i]:
+    #             cnt_F +=1
+    #     if y_test.T[0][i] == 1:
+    #         if y_test.T[0][i] == X_test_pred[i]:
+    #             cnt_T +=1
                 
-    print("양성 정답 :" ,cnt_T,"음성 정답 :",cnt_F)
+    # print("양성 정답 :" ,cnt_T,"음성 정답 :",cnt_F)
 
     n_epochs =200
     nn = NeuralNetMLP(n_hidden=100, 
@@ -126,7 +126,27 @@ def get_result_data(rows):
 
     
     print(A)
-    return nn.predict(A) # 결과
+
+    ##  0.478306 = 1% (1번기준)  54.06093기준
+    ##  0.693820 = 1% (2번기준)  5.481790
+    ##  0.433957 = 1% (3번기준)  72.545391
+    Percent_list = []
+    ## 100도에서시작 서 깎은거임
+    Percent1 = 100
+    Percent2 = 100
+    Percent3 = 100
+    ## array 0, 1, 2 는 (어깨랑 골반각도,)  (골반, 무릎각도,) (무릎, 발목각도)
+    Percent1 -= abs(A[0][0] - 54.06093 / 0.478306)
+    Percent2 -= abs(A[0][1] - 5.481790 / 0.693820)
+    Percent3 -= abs(A[0][2] - 72.545391 / 0.433957)
+    ## Percent_list 0, 1, 2는 (어깨랑 골반정확도,)  (골반, 무릎정확도,) (무릎, 발목정확도)
+    Percent_list.append(Percent1)
+    Percent_list.append(Percent2)
+    Percent_list.append(Percent3)
+    total_percent = (Percent_list[0]+Percent_list[1]+Percent_list[2])/3
+
+    ## Percent_list 0,1,2에 자세에 대한 각도가 들어감
+    return total_percent, nn.predict(A) # 결과
 
 
 
